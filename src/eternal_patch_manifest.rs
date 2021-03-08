@@ -28,7 +28,7 @@ fn decrypt_bm(enc_data: Vec<u8>, key_hex: &String) -> String {
     let cipher = Aes128Gcm::new(key);
     let mut buffer = Vec::new();
     buffer.extend_from_slice(&data);
-    cipher.decrypt_in_place_detached(nonce, b"build-manifest", &mut buffer, tag).unwrap();
+    cipher.decrypt_in_place_detached(nonce, b"build-manifest", &mut buffer, tag).expect("Failed to decrypt the build manifest data.");
     return String::from_utf8_lossy(&buffer).to_string();
 }
 
@@ -45,7 +45,7 @@ fn encrypt_bm(bm_dec: String, key_hex: &String) -> Vec<u8> {
     buffer.extend_from_slice(bm_dec.as_bytes());
 
     let cipher = Aes128Gcm::new(key);
-    let tag = cipher.encrypt_in_place_detached(nonce, b"build-manifest", &mut buffer).unwrap();
+    let tag = cipher.encrypt_in_place_detached(nonce, b"build-manifest", &mut buffer).expect("Failed to encrypt the new build manifest data.");
     buffer.append(&mut tag.to_vec());
     let mut empty_byte_array = vec![0; 0x40];
     buffer.append(&mut empty_byte_array);
