@@ -1,0 +1,20 @@
+[package]
+name = "eternal_patch_manifest"
+version = "0.1.0"
+authors = ["PowerBall253 <brunoanconasala@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "DEternal_patchManifest"
+path = "src/eternal_patch_manifest.rs"
+
+[dependencies]
+hex = "*"
+aes-gcm = "*"
+aead = "*"
+serde = "*"
+serde_derive = "*"
+serde_jsonrc = "*"
+getrandom = "*"
