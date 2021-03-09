@@ -39,7 +39,7 @@ The compiled binary will be located at the ./target/release folder.
 ### Windows
 To compile, you'll need a Rust environment set up with rustup and the Visual Studio C++ build tools. You can set it up by downloading rustup from [here](https://www.rust-lang.org/tools/install) and follow the given instructions, then downloading Visual Studio 2019 and selecting the C++ tools for download.
 
-NOTE: All the following commands are for PowerShell.
+NOTE: All the following commands are for CMD.
 
 Afterwards, clone this repo:
 ```
@@ -52,7 +52,7 @@ set "RUSTFLAGS=-Ctarget-cpu=sandybridge -Ctarget-feature=+aes,+sse2,+sse4.1,+sss
 
 Finally, cd into the directory and compile with cargo:
 ```
-cd EternalPatchManifestRust
+CD EternalPatchManifestRust
 cargo build --release
 ```
 The compiled binary will be located at the .\target\release folder.
