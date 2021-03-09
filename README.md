@@ -8,7 +8,7 @@ To patch your build manifest, place the compiled binary in your "base" folder, t
 ```
 where "AES KEY" is the key used to encrypt/decrypt the build manifest file.
 
-## Compiling
+## Compiling (Linux)
 To compile, you'll need a Rust environment set up with cargo.
 
 First, clone this repo:
