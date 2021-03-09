@@ -10,7 +10,7 @@ on Linux or
 ```
 .\DEternal_patchManifest.exe <AES Key>
 ```
-on Windows, where "AES KEY" is the key used to encrypt/decrypt the build manifest file.
+on Windows, where "AES Key" is the key used to encrypt/decrypt the build manifest file.
 
 ## Compiling
 ### Linux / macOS
