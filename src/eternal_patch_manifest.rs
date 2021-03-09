@@ -11,6 +11,7 @@ use std::io::prelude::*;
 use std::fs::File;
 use std::collections::HashMap;
 use getrandom::getrandom;
+use std::path::Path;
 
 fn decrypt_bm(enc_data: Vec<u8>, key_hex: &String) -> String {
     let size = enc_data.len() as usize;
@@ -72,7 +73,10 @@ fn optimize_json(dec_data: String) -> String {
     let mut dec_json: BuildManifestJson = serde_jsonrc::from_str(&dec_data).expect("JSON was not well formatted - corrupted file?");
 
     for (file_path, file_components) in dec_json.files.iter_mut() {
-        file_components.file_size = std::fs::metadata(file_path).unwrap().len() as i64;
+        if Path::new(file_path).exists() {
+            file_components.file_size = std::fs::metadata(file_path).unwrap().len() as i64;
+            println!("Found file {}, fileSize updated to: {}", file_path, file_components.file_size);
+        }
         file_components.hashes = vec!["e2df1b2aa831724ec987300f0790f04ad3f5beb8".to_string()];
         if file_components.file_size > 4294967295 {
             let mut num_hashes = 0;
