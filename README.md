@@ -58,4 +58,4 @@ cargo build --release
 The compiled binary will be located at the target/release folder.
 
 ## Credits
-SutandoTsukai181 and Visual Studio: for creating the original DEternal_patchManifest Python script.
+* SutandoTsukai181 and Visual Studio: for creating the original DEternal_patchManifest Python script.
