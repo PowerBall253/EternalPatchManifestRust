@@ -15,7 +15,12 @@ First, clone this repo:
 ```
 git clone https://github.com/PowerBall253/EternalPatchManifestRust.git
 ```
-Then, cd into the directory and compile with cargo:
+Then, set the following environment variable for maximum speed:
+```
+export RUSTFLAGS="-Ctarget-cpu=sandybridge -Ctarget-feature=+aes,+sse2,+sse4.1,+ssse3"
+```
+
+Finally, cd into the directory and compile with cargo:
 ```
 cd EternalPatchManifestRust
 cargo build --release
