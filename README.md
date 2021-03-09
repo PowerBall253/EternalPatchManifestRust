@@ -1,5 +1,5 @@
 # EternalPatchManifestRust
-Tool to patch DOOM Eternal's build manifest file for modding purposes, rewritten on Rust. Coded specifically for Linux users.
+Tool to patch DOOM Eternal's build manifest file for modding purposes, rewritten on Rust.
 
 ## Usage
 To patch your build manifest, place the compiled binary in your "base" folder, then run:
