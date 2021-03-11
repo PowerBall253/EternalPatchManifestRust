@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 extern crate hex;
 extern crate getrandom;
 extern crate serde;
@@ -79,16 +81,10 @@ fn optimize_json(dec_data: String) -> String {
         }
         file_components.hashes = vec!["e2df1b2aa831724ec987300f0790f04ad3f5beb8".to_string()];
         if file_components.file_size > 4294967295 {
-            let mut num_hashes = 0;
-            if (file_components.file_size / 4294967295) + (file_components.file_size % 4294967295) > 0 {
-                num_hashes = 1;
+            let num_hashes = (file_components.file_size / 4294967295) + ((file_components.file_size % 4294967295 > 0) as i64);
+            for _i in 0..(num_hashes - 1) {
+                file_components.hashes.push("e2df1b2aa831724ec987300f0790f04ad3f5beb8".to_string());
             }
-        
-            let mut hash_list: Vec<String> = Vec::new();
-            for i in 0..(num_hashes - 1) {
-                hash_list.push("e2df1b2aa831724ec987300f0790f04ad3f5beb8".to_string());
-            }
-            file_components.hashes = hash_list;
         }
         file_components.chunk_size = 4294967295;
     }
