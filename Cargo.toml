@@ -1,6 +1,6 @@
 [package]
 name = "eternal_patch_manifest"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["PowerBall253 <brunoanconasala@gmail.com>"]
 edition = "2018"
 
