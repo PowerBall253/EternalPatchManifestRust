@@ -48,8 +48,10 @@ fn decrypt_bm(enc_data: Vec<u8>, key_hex: &String) -> String {
 
     let cipher = Aes128Gcm::new(key);
     let mut buffer = Vec::new();
+
     buffer.extend_from_slice(&data);
     cipher.decrypt_in_place_detached(nonce, b"build-manifest", &mut buffer, tag).expect("Failed to decrypt the build manifest data.");
+
     return String::from_utf8_lossy(&buffer).to_string();
 }
 
@@ -68,9 +70,12 @@ fn encrypt_bm(bm_dec: String, key_hex: &String) -> Vec<u8> {
     let cipher = Aes128Gcm::new(key);
     let tag = cipher.encrypt_in_place_detached(nonce, b"build-manifest", &mut buffer).expect("Failed to encrypt the new build manifest data.");
     buffer.append(&mut tag.to_vec());
+
     let mut empty_byte_array = vec![0; 0x40];
     buffer.append(&mut empty_byte_array);
+
     nonce_bytes.append(&mut buffer);
+
     return nonce_bytes;
 }
 
@@ -97,13 +102,17 @@ fn optimize_json(dec_data: String) -> String {
             file_components.file_size = std::fs::metadata(file_path).unwrap().len() as i64;
             println!("Found file {}, fileSize updated to: {}", file_path, file_components.file_size);
         }
+
         file_components.hashes = vec!["e2df1b2aa831724ec987300f0790f04ad3f5beb8".to_string()];
+
         if file_components.file_size > 4294967295 {
             let num_hashes = (file_components.file_size / 4294967295) + ((file_components.file_size % 4294967295 > 0) as i64);
+
             for _i in 0..(num_hashes - 1) {
                 file_components.hashes.push("e2df1b2aa831724ec987300f0790f04ad3f5beb8".to_string());
             }
         }
+
         file_components.chunk_size = 4294967295;
     }
 
@@ -112,12 +121,14 @@ fn optimize_json(dec_data: String) -> String {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
+
     if args.len() < 2 {
         println!("DEternal_patchManifest Rust by PowerBall253, based on Python script by Visual Studio and SutandoTsukai181.");
         println!("\nUsage: ");
         println!("{} <AES Key>", &args[0]);
         std::process::exit(1);
     }
+    
     let key_hex = &args[1];
 
     let mut build_manifest = File::open("build-manifest.bin").expect("Failed to open build-manifest.bin for reading."); 
